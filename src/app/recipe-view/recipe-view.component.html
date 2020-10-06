@@ -1,0 +1,97 @@
+<div *ngIf="recipe">
+  <div class="recipeImage" *ngIf="recipe.image != 'null'">
+    <img alt="{{ recipe.name }}" src="{{ recipe.image }}" />
+  </div>
+  <a
+    class="btn btn-small btn-warning float-right btn-edit"
+    href="/recipe/edit/{{ recipe.id }}"
+    >Éditer cette recette</a
+  >
+  <div class="categories" *ngIf="recipe.category != 'null'">
+    <h4 class="display-5">{{ recipe.category }}</h4>
+  </div>
+  <h1 class="display-3">
+    {{ recipe.name }}
+  </h1>
+  <div class="text-muted" *ngIf="recipe.author != 'null'">
+    Auteur: {{ recipe.author }}
+  </div>
+  <div class="recipe_time" *ngIf="recipe.prep_time != 'null'">
+    <em>
+      Temps de préparation: a{{ recipe.prep_time }}a
+      {{ recipe.prep_time | durationFromIso | durationReadable }}
+    </em>
+  </div>
+  <div class="recipe_time" *ngIf="recipe.cook_time != 'null'">
+    <em>
+      Temps de cuisson:
+      {{ recipe.cook_time | durationFromIso | durationReadable }}
+    </em>
+  </div>
+  <div class="recipe_time" *ngIf="recipe.total_time != 'null'">
+    <em>
+      Temps total: {{ recipe.total_time | durationFromIso | durationReadable }}
+    </em>
+  </div>
+
+  <div class="blockquote description" *ngIf="recipe.description != 'null'">
+    {{ recipe.description }}
+  </div>
+  <div class="keywords" *ngIf="recipe.keywords">
+    <h4 class="card-title">Mots-clés:</h4>
+    <span
+      *ngFor="let keyword of recipe.keywords"
+      class="keyword badge badge-primary"
+    >
+      <span *ngIf="keyword.name">{{ keyword.name }}</span>
+    </span>
+  </div>
+  <div class="clearfix"></div>
+  <div class="card border-primary mb-3 ingredients" *ngIf="recipe.ingredients">
+    <div class="card-header">
+      <h4 class="card-title">Ingrédients:</h4>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients" class="ingredient">
+          {{ ingredient.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    class="card border-primary mb-3 how_to_section"
+    *ngIf="recipe.how_to_section_full"
+  >
+    <div class="card-header">
+      <h4 class="card-title">Marche à suivre:</h4>
+    </div>
+    <div class="card-body">
+      <div>
+        <ng-template
+          ngFor
+          let-how_to_section
+          [ngForOf]="recipe.how_to_section_full"
+        >
+          <h5 class="card-title" *ngIf="how_to_section.name">
+            {{ how_to_section.name }}
+          </h5>
+          <ol start="{{ how_to_step_index }}">
+            <ng-template
+              ngFor
+              let-how_to_step
+              [ngForOf]="how_to_section.how_to_steps"
+            >
+              {{ incrementStep() }}
+              <li class="how_to_step">
+                {{ how_to_step.name }}
+              </li>
+            </ng-template>
+          </ol>
+        </ng-template>
+        {{ resetStep() }}
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

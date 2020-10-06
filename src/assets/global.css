@@ -1,0 +1,10 @@
+.clearfix::after {
+  content: "";
+  clear: left;
+  display: table;
+  height: 10px;
+}
+
+body {
+  font-weight: 400;
+}

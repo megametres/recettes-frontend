@@ -1,0 +1,40 @@
+<h1>LISTE DES RECETTES</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">
+        <legend>Titre</legend>
+      </th>
+      <th scope="col">
+        <legend>Catégorie</legend>
+      </th>
+      <th scope="col">
+        <legend>Actions</legend>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let recipe of recipes">
+      <td>
+        <a href="/recipe/view/{{ recipe.id }}">{{ recipe.name }}</a>
+      </td>
+      <th scope="row">{{ recipe.category }}</th>
+      <td>
+        <a href="/recipe/view/{{ recipe.id }}" class="btn btn-info btn-sm">
+          Voir
+        </a>
+        <a href="/recipe/edit/{{ recipe.id }}" class="btn btn-warning btn-sm">
+          Éditer
+        </a>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteRecipe(recipe)"
+          data-toggle="modal"
+          data-target="#deleteRecipeModal"
+        >
+          Supprimer
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

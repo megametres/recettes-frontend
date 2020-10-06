@@ -1,0 +1,45 @@
+.description {
+  margin: 0.5rem 0;
+}
+
+.keywords {
+  margin: 1rem 0;
+}
+
+.keyword {
+  margin: 2px;
+}
+
+.recipeImage {
+  max-width: 30%;
+  float: left;
+}
+
+.recipeImage img {
+  max-width: 80%;
+  float: left;
+}
+
+.ingredients {
+  width: 24%;
+  margin-right: 6%;
+  float: left;
+}
+
+.ingredients ul,
+.how_to_section ol {
+  padding-left: 14px;
+}
+
+.how_to_section {
+  width: 70%;
+  float: left;
+}
+
+h4.card-title {
+  margin-bottom: 0;
+}
+
+h5.card-title {
+  margin-bottom: 25 !important;
+}

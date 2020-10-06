@@ -1,0 +1,109 @@
+<div *ngIf="recipe">
+  <h2>{{ recipe.name | uppercase }}</h2>
+  <div><span>id: </span>{{ recipe.id }}</div>
+  <div>
+    <label
+      >Nom de la recette:
+      <input [(ngModel)]="recipe.name" placeholder="Nom de la recette" />
+    </label>
+  </div>
+  <div>
+    <label
+      >Auteur:
+      <input [(ngModel)]="recipe.author" placeholder="Auteur" />
+    </label>
+  </div>
+  <div>
+    <label
+      >Image:
+      <input [(ngModel)]="recipe.image" placeholder="Image" />
+      <img src="{{ recipe.image }}" width="100" />
+    </label>
+  </div>
+  <div>
+    <label
+      >Temps de préparation:
+      <input
+        [(ngModel)]="recipe.prep_time"
+        placeholder="Temps de préparation"
+      />
+    </label>
+  </div>
+  <div>
+    <label
+      >Temps de cuisson:
+      <input [(ngModel)]="recipe.cook_time" placeholder="Temps de cuisson" />
+    </label>
+  </div>
+  <div>
+    <label
+      >Temps total:
+      <input [(ngModel)]="recipe.total_time" placeholder="Temps total" />
+    </label>
+  </div>
+  <div>
+    <label
+      >Portions:
+      <input [(ngModel)]="recipe.recipe_yield" placeholder="Portions" />
+    </label>
+  </div>
+  <div>
+    <label
+      >Description:
+      <input [(ngModel)]="recipe.description" placeholder="Description" />
+    </label>
+  </div>
+  <div>
+    <label
+      >Mots-clés:
+      <ul>
+        <li *ngFor="let keyword of recipe.keywords; let i = index">
+          <!-- <input [formControl]="recipe.keywords[i]" placeholder="Mot-clé" />
+            <button (click)="removeKeyword(i)">-</button> -->
+          <input [(ngModel)]="keyword.name" placeholder="Mot-clé" />
+        </li>
+      </ul>
+      <button (click)="addKeyword()">+</button>
+    </label>
+  </div>
+  <div>
+    <label
+      >Ingrédients:
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          <input [(ngModel)]="ingredient.name" placeholder="Ingrédient" />
+        </li>
+      </ul>
+    </label>
+  </div>
+
+  <div>
+    <label
+      >Préparation:
+      <ul>
+        <ng-template
+          ngFor
+          let-how_to_section
+          [ngForOf]="recipe.how_to_section_full"
+        >
+          <li>
+            <input [(ngModel)]="how_to_section.name" placeholder="Section" />
+            <ul>
+              <ng-template
+                ngFor
+                let-how_to_step
+                [ngForOf]="how_to_section.how_to_steps"
+              >
+                <li>
+                  <input [(ngModel)]="how_to_step.name" placeholder="Étape" />
+                </li>
+              </ng-template>
+            </ul>
+          </li>
+        </ng-template>
+      </ul>
+    </label>
+  </div>
+  <a class="btn btn-info" href="/recipe/view/{{ recipe.id }}">Annuler</a>&nbsp;
+  <button class="btn btn-danger" (click)="saveRecipe()">Enregistrer</button>
+</div>

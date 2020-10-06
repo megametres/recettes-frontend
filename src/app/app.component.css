@@ -1,0 +1,13 @@
+.App {
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+.content {
+  text-align: left;
+}
