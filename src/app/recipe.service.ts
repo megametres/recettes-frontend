@@ -11,6 +11,8 @@ import { Category, Recipe } from './recipe';
 import { RECIPES } from './mock-recipes';
 import { MessageService } from './message.service';
 
+require('dotenv').config();
+
 const getHttpOptions = {
   headers: new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -27,7 +29,7 @@ const postHttpOptions = {
   providedIn: 'root',
 })
 export class RecipeService {
-  private apiUrl = 'http://localhost:8000/'; // URL to web api
+  private apiUrl = '${process.env.API_URL}' ?? 'http://localhost:8000/'; // URL to web api
 
   constructor(
     private messageService: MessageService,
