@@ -10,8 +10,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Category, Recipe } from './recipe';
 import { RECIPES } from './mock-recipes';
 import { MessageService } from './message.service';
-
-require('dotenv').config();
+import { environment } from '../environments/environment';
 
 const getHttpOptions = {
   headers: new HttpHeaders({
@@ -29,7 +28,7 @@ const postHttpOptions = {
   providedIn: 'root',
 })
 export class RecipeService {
-  private apiUrl = '${process.env.API_URL}' ?? 'http://localhost:8000/'; // URL to web api
+  private apiUrl = environment.api_url; // URL to web api
 
   constructor(
     private messageService: MessageService,
