@@ -1,109 +1,150 @@
-<div *ngIf="recipe">
-  <h2>{{ recipe.name | uppercase }}</h2>
-  <div><span>id: </span>{{ recipe.id }}</div>
-  <div>
-    <label
-      >Nom de la recette:
-      <input [(ngModel)]="recipe.name" placeholder="Nom de la recette" />
-    </label>
-  </div>
-  <div>
-    <label
-      >Auteur:
-      <input [(ngModel)]="recipe.author" placeholder="Auteur" />
-    </label>
-  </div>
-  <div>
-    <label
-      >Image:
-      <input [(ngModel)]="recipe.image" placeholder="Image" />
-      <img src="{{ recipe.image }}" width="100" />
-    </label>
-  </div>
-  <div>
-    <label
-      >Temps de préparation:
+<div>
+  <form [formGroup]="recipeForm" (ngSubmit)="saveRecipe()">
+    <h2>{{ recipeForm.value.name }}</h2>
+    <div class="form-group w-50">
+      <label class="w-100">Nom de la recette:
       <input
-        [(ngModel)]="recipe.prep_time"
-        placeholder="Temps de préparation"
+        type="text"
+        formControlName="name"
+        required
+        placeholder="Nom de la recette"
+        class="form-control"
       />
     </label>
-  </div>
-  <div>
-    <label
-      >Temps de cuisson:
-      <input [(ngModel)]="recipe.cook_time" placeholder="Temps de cuisson" />
+    </div>
+    <div class="form-group w-50">
+      <label class="w-100">Auteur:
+      <input
+        type="text"
+        formControlName="author"
+        placeholder="Auteur"
+        class="form-control"
+      />
     </label>
-  </div>
-  <div>
-    <label
-      >Temps total:
-      <input [(ngModel)]="recipe.total_time" placeholder="Temps total" />
+    </div>
+    <div class="form-group w-50">
+      <label class="w-100">Image:
+      <input
+        type="text"
+        formControlName="image"
+        placeholder="Image"
+        class="form-control"
+      />
     </label>
-  </div>
-  <div>
-    <label
-      >Portions:
-      <input [(ngModel)]="recipe.recipe_yield" placeholder="Portions" />
-    </label>
-  </div>
-  <div>
-    <label
-      >Description:
-      <input [(ngModel)]="recipe.description" placeholder="Description" />
-    </label>
-  </div>
-  <div>
-    <label
-      >Mots-clés:
-      <ul>
-        <li *ngFor="let keyword of recipe.keywords; let i = index">
-          <!-- <input [formControl]="recipe.keywords[i]" placeholder="Mot-clé" />
-            <button (click)="removeKeyword(i)">-</button> -->
-          <input [(ngModel)]="keyword.name" placeholder="Mot-clé" />
-        </li>
-      </ul>
-      <button (click)="addKeyword()">+</button>
-    </label>
-  </div>
-  <div>
-    <label
-      >Ingrédients:
-      <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">
-          <input [(ngModel)]="ingredient.name" placeholder="Ingrédient" />
-        </li>
-      </ul>
-    </label>
-  </div>
+      <img src="{{ recipeForm.value.image }}" width="100" />
+    </div>
+    <div class="form-group w-50">
+      <label class="w-100">Temps de préparation:
+      <input
+        type="text"
+        formControlName="prep_time"
+        placeholder="Temps de préparation"
+        class="form-control"
+      />
+      </label>
+    </div>
+    <div class="form-group w-50">
+      <label class="w-100">Temps de cuisson:
+        <input
+          type="text"
+          formControlName="cook_time"
+          placeholder="Temps de cuisson"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group w-50">
+      <label class="w-100">Temps total:
+        <input
+          type="text"
+          formControlName="total_time"
+          placeholder="Temps total"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group w-50">
+      <label class="w-100">Portions:
+        <input
+          type="text"
+          formControlName="recipe_yield"
+          placeholder="Portions"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <div class="form-group w-50">
+      <label class="w-100">Description:
+        <input
+          type="text"
+          formControlName="description"
+          placeholder="Description"
+          class="form-control"
+        />
+      </label>
+    </div>
+    <hr/>
+    <div formArrayName="ingredients">
+      <h3>Ingredients <button (click)="addIngredient()" class="btn btn-info btn-sm mb-2" type="button">Ajouter un ingredient</button></h3>
 
-  <div>
-    <label
-      >Préparation:
-      <ul>
-        <ng-template
-          ngFor
-          let-how_to_section
-          [ngForOf]="recipe.how_to_section_full"
-        >
-          <li>
-            <input [(ngModel)]="how_to_section.name" placeholder="Section" />
-            <ul>
-              <ng-template
-                ngFor
-                let-how_to_step
-                [ngForOf]="how_to_section.how_to_steps"
-              >
-                <li>
-                  <input [(ngModel)]="how_to_step.name" placeholder="Étape" />
-                </li>
-              </ng-template>
-            </ul>
-          </li>
-        </ng-template>
-      </ul>
-    </label>
-  </div>
-  <a class="btn btn-info" href="/recipe/view/{{ recipe.id }}">Annuler</a>&nbsp;
+      <div *ngFor="let ingredient of ingredients.controls; let i = index">
+        <label [formGroup]="ingredient" class="w-50">
+          <input type="hidden" formControlName="id" />
+          <input type="text" formControlName="name" class="form-control w-75 d-inline-block" />
+          <button (click)="removeIngredient(i)" class="btn btn-danger btn-sm ml-2" type="button">Retirer cet ingrédient</button>
+        </label>
+      </div>
+    </div>
+    <hr/>
+    <div formArrayName="keywords">
+      <h3>Mot-clés <button (click)="addKeyword()" class="btn btn-info btn-sm mb-2" type="button">Ajouter un Mot-clé</button></h3>
+
+      <div *ngFor="let keyword of keywords.controls; let i = index">
+        <label [formGroup]="keyword" class="w-50">
+          <input type="hidden" formControlName="id" />
+          <input type="text" formControlName="name" class="form-control w-75 d-inline-block" />
+          <button (click)="removeKeyword(i)" class="btn btn-danger btn-sm ml-2" type="button">Retirer ce Mot-clé</button>
+        </label>
+      </div>
+    </div>
+    <hr />
+    <h3>
+      Bloc d'instructions
+      <button (click)="addHowToSection()" class="btn btn-info btn-sm mb-2" type="button">Ajouter un bloc</button>
+    </h3>
+    <div formArrayName="how_to_section_full">
+      <div
+        *ngFor="
+          let how_to_section of recipeForm.get('how_to_section_full')['controls'];
+          let sectionIndex = index
+        "
+        [formGroupName]="sectionIndex"
+      >
+        <label class="w-50">
+          Titre
+          <input formControlName="name" class="form-control w-100 d-inline-block" />
+        </label>
+        <h4>Étapes <button (click)="addHowToStep(how_to_section)" class="btn btn-info btn-sm mb-2" type="button">Ajouter une étape</button></h4>
+        <div formArrayName="how_to_steps">
+          <div
+            *ngFor="
+              let how_to_step of how_to_section_steps(sectionIndex).controls;
+              let stepIndex = index
+            "
+            [formGroupName]="stepIndex"
+          >
+            <label class="w-50">
+              <input formControlName="name" class="form-control w-75 d-inline-block" />
+              <button (click)="removeHowToStep(how_to_section, stepIndex)" class="btn btn-danger btn-sm ml-2" type="button">Retirer cette étape</button>
+            </label>
+          </div>
+        </div>
+        <button (click)="removeHowToSection(sectionIndex)" class="btn btn-danger btn-sm">Retirer ce bloc</button>
+        <hr />
+      </div>
+    </div>
+  </form>
+
+  <button class="btn btn-info" onclick="window.history.back()">Annuler</button>&nbsp;
   <button class="btn btn-danger" (click)="saveRecipe()">Enregistrer</button>
 </div>

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -8,7 +8,6 @@ import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { RecipeIngredientsComponent } from './recipe-edit/recipe-ingredients/recipe-ingredients.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RecipeImportComponent } from './recipe-import/recipe-import.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
@@ -22,7 +21,6 @@ import { DurationReadablePipe } from './utils/duration-readable.pipe';
     RecipesComponent,
     RecipeViewComponent,
     MessagesComponent,
-    RecipeIngredientsComponent,
     NavbarComponent,
     RecipeImportComponent,
     RecipeEditComponent,
@@ -32,6 +30,7 @@ import { DurationReadablePipe } from './utils/duration-readable.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     LuxonModule,

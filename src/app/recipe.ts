@@ -1,5 +1,4 @@
 import { FormArray, FormControl } from '@angular/forms';
-import { RecipeIngredientsComponent } from './recipe-edit/recipe-ingredients/recipe-ingredients.component';
 
 export interface Recipe {
   id: number;
