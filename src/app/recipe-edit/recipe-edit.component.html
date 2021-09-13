@@ -2,54 +2,61 @@
   <form [formGroup]="recipeForm" (ngSubmit)="saveRecipe()">
     <h2>{{ recipeForm.value.name }}</h2>
     <div class="form-group w-50">
-      <label class="w-100">Nom de la recette:
-      <input
-        type="text"
-        formControlName="name"
-        required
-        placeholder="Nom de la recette"
-        class="form-control"
-      />
-    </label>
+      <label class="w-100"
+        >Nom de la recette:
+        <input
+          type="text"
+          formControlName="name"
+          required
+          placeholder="Nom de la recette"
+          class="form-control"
+        />
+      </label>
     </div>
     <div class="form-group w-50">
-      <label class="w-100">Auteur:
-      <input
-        type="text"
-        formControlName="author"
-        placeholder="Auteur"
-        class="form-control"
-      />
-    </label>
+      <label class="w-100"
+        >Auteur:
+        <input
+          type="text"
+          formControlName="author"
+          placeholder="Auteur"
+          class="form-control"
+        />
+      </label>
     </div>
     <div class="form-group w-50">
-      <label class="w-100">Image:
-      <input
-        type="text"
-        formControlName="image"
-        placeholder="Image"
-        class="form-control"
-      />
-    </label>
+      <label class="w-100"
+        >Image:
+        <input
+          type="text"
+          formControlName="image"
+          placeholder="Image"
+          class="form-control"
+        />
+      </label>
       <img src="{{ recipeForm.value.image }}" width="100" />
     </div>
     <div class="form-group w-50">
-      <label class="w-100">Temps de préparation:
-        <ngx-duration-picker [(value)]="recipeForm.value.prep_time" [options]="{ showPreview: false, showYears: false, showMonths: false, showWeeks: false, showSeconds: false, labels: { days: 'jours', hours: 'heures', minutes: 'minutes'}}"></ngx-duration-picker>
+      <label class="w-100"
+        >Temps de préparation:
+        <!-- <ngx-duration-picker [(value)]="recipeForm.value.prep_time" [options]="{ showPreview: false, showYears: false, showMonths: false, showWeeks: false, showSeconds: false, labels: { days: 'jours', hours: 'heures', minutes: 'minutes'}}"></ngx-duration-picker> -->
       </label>
     </div>
     <div class="form-group w-50">
-      <label class="w-100">Temps de cuisson:
-        <ngx-duration-picker [(value)]="recipeForm.value.cook_time" [options]="{ showPreview: false, showYears: false, showMonths: false, showWeeks: false, showSeconds: false, labels: { days: 'jours', hours: 'heures', minutes: 'minutes'}}"></ngx-duration-picker>
+      <label class="w-100"
+        >Temps de cuisson:
+        <!-- <ngx-duration-picker [(value)]="recipeForm.value.cook_time" [options]="{ showPreview: false, showYears: false, showMonths: false, showWeeks: false, showSeconds: false, labels: { days: 'jours', hours: 'heures', minutes: 'minutes'}}"></ngx-duration-picker> -->
       </label>
     </div>
     <div class="form-group w-50">
-      <label class="w-100">Temps total:
-        <ngx-duration-picker [(value)]="recipeForm.value.total_time" [options]="{ showPreview: false, showYears: false, showMonths: false, showWeeks: false, showSeconds: false, labels: { days: 'jours', hours: 'heures', minutes: 'minutes'}}"></ngx-duration-picker>
+      <label class="w-100"
+        >Temps total:
+        <!-- <ngx-duration-picker [(value)]="recipeForm.value.total_time" [options]="{ showPreview: false, showYears: false, showMonths: false, showWeeks: false, showSeconds: false, labels: { days: 'jours', hours: 'heures', minutes: 'minutes'}}"></ngx-duration-picker> -->
       </label>
     </div>
     <div class="form-group w-50">
-      <label class="w-100">Portions:
+      <label class="w-100"
+        >Portions:
         <input
           type="text"
           formControlName="recipe_yield"
@@ -59,7 +66,8 @@
       </label>
     </div>
     <div class="form-group w-50">
-      <label class="w-100">Description:
+      <label class="w-100"
+        >Description:
         <input
           type="text"
           formControlName="description"
@@ -68,48 +76,106 @@
         />
       </label>
     </div>
-    <hr/>
+    <hr />
     <div formArrayName="ingredients">
-      <h3>Ingredients <button (click)="addIngredient()" class="btn btn-info btn-sm mb-2" type="button">Ajouter un ingredient</button></h3>
+      <h3>
+        Ingredients
+        <button
+          (click)="addIngredient()"
+          class="btn btn-info btn-sm mb-2"
+          type="button"
+        >
+          Ajouter un ingredient
+        </button>
+      </h3>
 
       <div *ngFor="let ingredient of ingredients.controls; let i = index">
         <label [formGroup]="ingredient" class="w-50">
           <input type="hidden" formControlName="id" />
-          <input type="text" formControlName="name" class="form-control w-75 d-inline-block" />
-          <button (click)="removeIngredient(i)" class="btn btn-danger btn-sm ml-2" type="button">Retirer cet ingrédient</button>
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control w-75 d-inline-block"
+          />
+          <button
+            (click)="removeIngredient(i)"
+            class="btn btn-danger btn-sm ml-2"
+            type="button"
+          >
+            Retirer cet ingrédient
+          </button>
         </label>
       </div>
     </div>
-    <hr/>
+    <hr />
     <div formArrayName="keywords">
-      <h3>Mot-clés <button (click)="addKeyword()" class="btn btn-info btn-sm mb-2" type="button">Ajouter un Mot-clé</button></h3>
+      <h3>
+        Mot-clés
+        <button
+          (click)="addKeyword()"
+          class="btn btn-info btn-sm mb-2"
+          type="button"
+        >
+          Ajouter un Mot-clé
+        </button>
+      </h3>
 
       <div *ngFor="let keyword of keywords.controls; let i = index">
         <label [formGroup]="keyword" class="w-50">
           <input type="hidden" formControlName="id" />
-          <input type="text" formControlName="name" class="form-control w-75 d-inline-block" />
-          <button (click)="removeKeyword(i)" class="btn btn-danger btn-sm ml-2" type="button">Retirer ce Mot-clé</button>
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control w-75 d-inline-block"
+          />
+          <button
+            (click)="removeKeyword(i)"
+            class="btn btn-danger btn-sm ml-2"
+            type="button"
+          >
+            Retirer ce Mot-clé
+          </button>
         </label>
       </div>
     </div>
     <hr />
     <h3>
       Bloc d'instructions
-      <button (click)="addHowToSection()" class="btn btn-info btn-sm mb-2" type="button">Ajouter un bloc</button>
+      <button
+        (click)="addHowToSection()"
+        class="btn btn-info btn-sm mb-2"
+        type="button"
+      >
+        Ajouter un bloc
+      </button>
     </h3>
     <div formArrayName="how_to_section_full">
       <div
         *ngFor="
-          let how_to_section of recipeForm.get('how_to_section_full')['controls'];
+          let how_to_section of recipeForm.get('how_to_section_full')[
+            'controls'
+          ];
           let sectionIndex = index
         "
         [formGroupName]="sectionIndex"
       >
         <label class="w-50">
           Titre
-          <input formControlName="name" class="form-control w-100 d-inline-block" />
+          <input
+            formControlName="name"
+            class="form-control w-100 d-inline-block"
+          />
         </label>
-        <h4>Étapes <button (click)="addHowToStep(how_to_section)" class="btn btn-info btn-sm mb-2" type="button">Ajouter une étape</button></h4>
+        <h4>
+          Étapes
+          <button
+            (click)="addHowToStep(how_to_section)"
+            class="btn btn-info btn-sm mb-2"
+            type="button"
+          >
+            Ajouter une étape
+          </button>
+        </h4>
         <div formArrayName="how_to_steps">
           <div
             *ngFor="
@@ -119,20 +185,35 @@
             [formGroupName]="stepIndex"
           >
             <label class="w-50">
-              <input formControlName="name" class="form-control w-75 d-inline-block" />
-              <button (click)="removeHowToStep(how_to_section, stepIndex)" class="btn btn-danger btn-sm ml-2" type="button">Retirer cette étape</button>
+              <input
+                formControlName="name"
+                class="form-control w-75 d-inline-block"
+              />
+              <button
+                (click)="removeHowToStep(how_to_section, stepIndex)"
+                class="btn btn-danger btn-sm ml-2"
+                type="button"
+              >
+                Retirer cette étape
+              </button>
             </label>
           </div>
         </div>
-        <button (click)="removeHowToSection(sectionIndex)" class="btn btn-danger btn-sm">Retirer ce bloc</button>
+        <button
+          (click)="removeHowToSection(sectionIndex)"
+          class="btn btn-danger btn-sm"
+        >
+          Retirer ce bloc
+        </button>
         <hr />
       </div>
     </div>
     <div>
-      {{recipeForm.value | json}}
+      {{ recipeForm.value | json }}
     </div>
   </form>
 
-  <button class="btn btn-info" onclick="window.history.back()">Annuler</button>&nbsp;
+  <button class="btn btn-info" onclick="window.history.back()">Annuler</button
+  >&nbsp;
   <button class="btn btn-danger" (click)="saveRecipe()">Enregistrer</button>
 </div>

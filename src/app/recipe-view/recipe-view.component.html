@@ -18,7 +18,7 @@
   </div>
   <div class="recipe_time" *ngIf="recipe.prep_time != 'null'">
     <em>
-      Temps de préparation: a{{ recipe.prep_time }}a
+      Temps de préparation:
       {{ recipe.prep_time | durationFromIso | durationReadable }}
     </em>
   </div>

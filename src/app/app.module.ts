@@ -14,7 +14,6 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { ModalDeleteComponent } from './recipes/modal-delete/modal-delete.component';
 import { LuxonModule } from 'luxon-angular';
 import { DurationReadablePipe } from './utils/duration-readable.pipe';
-import { DurationPickerModule } from 'ngx-duration-picker';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import { DurationPickerModule } from 'ngx-duration-picker';
   imports: [
     AppRoutingModule,
     BrowserModule,
-    DurationPickerModule,
     FormsModule,
     HttpClientModule,
     LuxonModule,
